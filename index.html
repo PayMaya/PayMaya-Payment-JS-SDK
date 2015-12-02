@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PayaMaya Payment SDK</title>
+
+		<script src="dist/sdk/paymaya-sdk.min.js"></script>
+
+		<link href="dist/css/style.min.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<div class="form-container">
+
+			<div style="width:225px; height:auto; background-color:#e4e4e4;" class="pm-payment-form-container centered">
+				<img width="50%" height="null" src="assets/img/pm-logo.png" alt="Paymaya" class="img-padding">
+
+				<form id="payment-form" action="#" method="POST">
+
+					<input type="text" name="card-number" class="card-number" id="card-number" size="16" value=""  placeholder="Card number" maxlength="16" />
+					<input type="text" name="card-expiry-month" class="card-expiry-month" id="card-expiry-month" size="2" value="" placeholder="MM" maxlength="2" />
+					<input type="text" class="card-expiry-year" id="card-expiry-year" size="4" value="" placeholder="YYYY" maxlength="4" />
+					<input type="text" name="card-cvc" class="card-cvc" id="card-cvc" size="3" value="" placeholder="CVC" maxlength="3" />
+
+					<div class="validation">
+						<!--Validation Message-->
+					</div>
+
+					<button type="submit" class="submit-button" id="submit-button">
+						Pay
+					</button>
+
+				</form>
+			</div>
+		</div>
+
+		<script>
+			var paymayaPublicKey = "bee386662c04e4c6f872b5d4b13b7b87bd84ac68f3a95b8998298b32cd";
+			var paymentForm = document.querySelector("#payment-form");
+			var cardNumber = paymentForm.querySelector("#card-number");
+			var cardCvc = paymentForm.querySelector("#card-cvc");
+			var cardExpiryMonth = paymentForm.querySelector("#card-expiry-month");
+			var cardExpiryYear = paymentForm.querySelector("#card-expiry-year");
+
+			var validation = document.querySelector('.validation');
+			var paymentFormSubmitBtn = paymentForm.querySelector("#submit-button");
+
+			paymentForm.onsubmit = function(e) {
+				
+				//Preventing the default behavior
+				e.preventDefault();
+
+				//Basic client side validation - Check inputs if empty or missing
+				if (cardNumber.value === "" || cardCvc.value === "" || cardExpiryMonth.value === "" || cardExpiryYear.value === "") {
+
+					document.querySelector(".validation").innerHTML = "Please Input your credit card information";
+
+				} else {
+
+					//Disable the submit button to prevent repeated clicks
+					paymentFormSubmitBtn.setAttribute('disabled', false);
+
+					//Generate a Payment Token
+					var payMayaPayments = new PayMaya.Payments(paymayaPublicKey);
+					payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
+
+				}
+
+				//User Defined callback function
+				function success(paymentToken) {
+
+					document.querySelector(".validation").innerHTML = "Successfully made a payment token for " + paymentToken.id;
+
+				}
+
+				function failure(error) {
+
+					document.querySelector(".validation").innerHTML = error;
+
+				}
+
+			}
+
+		</script>
+
+	</body>
+</html>

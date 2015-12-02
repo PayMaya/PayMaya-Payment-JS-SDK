@@ -1,0 +1,72 @@
+input.invalid {
+	border: 2px solid red;
+}
+.validation.failed {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+	color: red;
+	font-weight: 100;
+	font-style: italic;	
+}
+.validation.passed {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight: 100;
+	font-style: italic;
+	color: green;	
+}
+.centered {
+	text-align: center;
+}
+input[type=text] {
+	font-family: "Open Sans", sans-serif;
+	width: 15em;
+	height: 0.5em;
+	border-radius: 0;
+	font-size: 0.8em;
+	padding: 1em;
+	background: rgba(255,255,255,0.5);
+	margin: 0 0 10px 0;
+}
+input.card-expiry-month{
+	width:4.5em;
+}
+input.card-expiry-year{
+	width:8em;
+}
+
+button {
+	font-family: "Open Sans", sans-serif;
+	font-size: 1em;
+	width: 220px;
+	padding: 10px 15px;
+	margin: 15px 0px;
+	border: 0 none;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background: rgba(69,178,232,1);
+	background: -moz-linear-gradient(top, rgba(69,178,232,1) 0%, rgba(69,178,232,1) 25%, rgba(48,152,222,1) 77%, rgba(48,152,222,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(69,178,232,1)), color-stop(25%, rgba(69,178,232,1)), color-stop(77%, rgba(48,152,222,1)), color-stop(100%, rgba(48,152,222,1)));
+	background: -webkit-linear-gradient(top, rgba(69,178,232,1) 0%, rgba(69,178,232,1) 25%, rgba(48,152,222,1) 77%, rgba(48,152,222,1) 100%);
+	background: -o-linear-gradient(top, rgba(69,178,232,1) 0%, rgba(69,178,232,1) 25%, rgba(48,152,222,1) 77%, rgba(48,152,222,1) 100%);
+	background: -ms-linear-gradient(top, rgba(69,178,232,1) 0%, rgba(69,178,232,1) 25%, rgba(48,152,222,1) 77%, rgba(48,152,222,1) 100%);
+	background: linear-gradient(to bottom, rgba(69,178,232,1) 0%, rgba(69,178,232,1) 25%, rgba(48,152,222,1) 77%, rgba(48,152,222,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45b2e8', endColorstr='#3098de', GradientType=0 );
+}
+.form-container {
+	margin: 0 auto !important;
+	display: table;
+}
+
+.pm-payment-form-container{
+	border:thin #f4f4f4 solid;
+	border-radius: 10px;
+	box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+	padding-left:20px;
+	padding-right:20px;
+}
+
+.img-padding{
+	padding:10px;
+}
