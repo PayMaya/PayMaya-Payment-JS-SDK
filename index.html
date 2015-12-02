@@ -62,13 +62,13 @@
 					//Disable the submit button to prevent repeated clicks
 					paymentFormSubmitBtn.setAttribute('disabled', false);
 
-					//Generate a Payment Token
+					//Generate a PaymentToken
 					var payMayaPayments = new PayMaya.Payments(paymayaPublicKey);
 					payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
 
 				}
 
-				//User Defined callback function
+				//User-defined callback function
 				function success(paymentToken) {
 
 					document.querySelector(".validation").innerHTML = "Successfully made a payment token for " + paymentToken.id;
