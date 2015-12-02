@@ -1,1 +1,1 @@
-# PayMaya-Payment-JS-SDK
+See PayMaya Payment JS SDK documentation <a href="https://staging-dev.paymaya.com/blog/entry/payment-js-sdk">here</a>
