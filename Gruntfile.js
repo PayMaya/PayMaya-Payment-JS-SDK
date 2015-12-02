@@ -1,4 +1,3 @@
-/*jslint node: true */
 "use strict";
 
 module.exports = function(grunt) {
@@ -19,7 +18,6 @@ module.exports = function(grunt) {
 				separator : ';'
 			},
 			dist : {
-				//src : ['<%= meta.sdkAssetsPath %>paymaya.js', '<%= meta.sdkAssetsPath %>validation.js'],
 				src : ['<%= meta.sdkAssetsPath %>paymaya.js'],
 				dest : 'dist/sdk/paymaya-sdk.js'
 			}
@@ -32,10 +30,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
-		//jshint : {
-		//all : ['Gruntfile.js', '<%= meta.sdkPath %>*.js', '<%= meta.sdkPath %>**/*.js']
-		//},
 
 		cssmin : {
 			target : {
@@ -51,7 +45,6 @@ module.exports = function(grunt) {
 		watch : {
 			dev : {
 				files : ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.sdkDistPath %>*.js', '*.html'],
-				//tasks : ['jshint', 'concat:dist'],
 				tasks : ['concat:dist'],
 				options : {
 					atBegin : true
@@ -59,7 +52,6 @@ module.exports = function(grunt) {
 			},
 			min : {
 				files : ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.sdkDistPath %>*.js', '*.html'],
-				//tasks : ['jshint', 'concat:dist', 'uglify:dist'],
 				tasks : ['concat:dist', 'uglify:dist'],
 				options : {
 					atBegin : true
@@ -69,12 +61,10 @@ module.exports = function(grunt) {
 
 	});
 
-	//grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-	//grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 	grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
 };
