@@ -43,7 +43,7 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
   request = PayMaya.Payments.getXMLHttpRequest();
 
-  if (request != null) {
+  if (request !== null) {
 
     request.open('POST', 'http://private-anon-5c87df497-paymayapaymentsapi.apiary-mock.com/payment-tokens');
     request.setRequestHeader('Content-Type', 'application/json');
@@ -106,12 +106,12 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
   }
 
-}
+};
 
 PayMaya.Payments.getXMLHttpRequest = function() {
   if (window.XMLHttpRequest) {
 
-    return new window.XMLHttpRequest;
+    return new window.XMLHttpRequest();
 
   } else {
     try {
