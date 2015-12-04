@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 		uglify : {
 			dist : {
 				files : {
-					'dist/sdk/paymaya-sdk.min.js' : ['assets/sdk/paymaya-sdk.js']
+					'<%= meta.sdkDistPath %>paymaya-sdk.min.js' : ['<%= meta.sdkAssetsPath %>paymaya-sdk.js']
 				}
 			}
 		},
@@ -35,14 +35,14 @@ module.exports = function(grunt) {
 		watch : {
 			dev : {
 				files : ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.sdkDistPath %>*.js', '*.html'],
-				tasks : ['concat:dist'],
+				tasks : ['uglify:dist'],
 				options : {
 					atBegin : true
 				}
 			},
 			min : {
 				files : ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.sdkDistPath %>*.js', '*.html'],
-				tasks : ['concat:dist', 'uglify:dist'],
+				tasks : ['uglify:dist'],
 				options : {
 					atBegin : true
 				}
