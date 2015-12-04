@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 			sdkAssetsPath : 'assets/sdk/'
 		},
 
-		concat : {
+		/*concat : {
 			options : {
 				separator : ';'
 			},
@@ -21,12 +21,12 @@ module.exports = function(grunt) {
 				src : ['<%= meta.sdkAssetsPath %>paymaya.js'],
 				dest : 'dist/sdk/paymaya-sdk.js'
 			}
-		},
+		},*/
 
 		uglify : {
 			dist : {
 				files : {
-					'dist/sdk/paymaya-sdk.min.js' : ['dist/sdk/paymaya-sdk.js']
+					'dist/sdk/paymaya-sdk.min.js' : ['assets/sdk/paymaya-sdk.js']
 				}
 			}
 		},
@@ -61,10 +61,11 @@ module.exports = function(grunt) {
 
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-concat');
+	//grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-	grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
+	//grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
+	grunt.registerTask('default', ['uglify', 'cssmin']);
 };
