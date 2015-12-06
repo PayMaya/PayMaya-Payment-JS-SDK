@@ -10,6 +10,10 @@ input[type=text] {
   padding: 1em;
   background: rgba(255, 255, 255, 0.5);
   margin: 0 0 10px 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
 }
 input.card-expiry-month {
   width: 4.5em;
