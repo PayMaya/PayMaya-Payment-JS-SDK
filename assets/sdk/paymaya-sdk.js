@@ -1,4 +1,4 @@
-/*global ActiveXObject: false */
+/* global ActiveXObject: false */
 var PayMaya = PayMaya || {};
 
 PayMaya.Payments = function(pfKey) {
@@ -59,7 +59,7 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
           dataArr = JSON.parse(request.responseText);
 
-          //When form processing: Success
+          // When form processing: Success
           if (dataArr.hasOwnProperty("id") && dataArr.id !== "" && dataArr.state === "created") {
 
             formObj.success(dataArr);
@@ -71,12 +71,12 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
           }
 
-          //When form processing: Failed
-          //if has a category property and category value is "payments-error"
+          // When form processing: Failed
+          // If has a category property and category value is "payments-error"
           if (dataArr.hasOwnProperty("category") && dataArr.category === "payments-error") {
 
-            //process if has an error
-            //Idempotence Error code
+            // Process if has an error
+            // Idempotence Error code
             if (dataArr.code === "5001") {
 
               formObj.failure(dataArr.message);
@@ -87,7 +87,7 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
         } else {
 
-          //Error Codes and Responses
+          // Error Codes and Responses
           errorMessage = 'Error';
           formObj.failure(errorMessage);
 
@@ -113,7 +113,7 @@ PayMaya.Payments.getXMLHttpRequest = function() {
   var xhttp = null;
 
   if (window.XMLHttpRequest) {
-    // Firefox, Opera 8.0+, Safari
+    // Chome, Firefox, Opera 8.0+, Safari
     xhttp = new window.XMLHttpRequest();
 
   } else {
