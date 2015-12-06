@@ -1,3 +1,4 @@
+/*global ActiveXObject: false */
 var PayMaya = PayMaya || {};
 
 PayMaya.Payments = function(pfKey) {
@@ -107,20 +108,28 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
 };
 
-PayMaya.Payments.getXMLHttpRequest = function() {
-  if (window.XMLHttpRequest) {
+PayMaya.Payments.getXMLHttpRequest = function () {
 
-    return new window.XMLHttpRequest();
+    var xhttp = null;
+    
+    if (window.XMLHttpRequest) {
+      // Firefox, Opera 8.0+, Safari
+      xhttp = new window.XMLHttpRequest();
 
-  } else {
-    try {
+    } else {
 
-      return new ActiveXObject("MSXML2.XMLHTTP.3.0");
+      try {
+        // Internet Explorer
+        xhttp = new ActiveXObject("MSXML2.XMLHTTP.3.0");
 
-    } catch (ex) {
+      } catch (ex) {
 
-      return null;
+        return null;
+
+      }
 
     }
-  }
-};
+
+    return xhttp;
+
+  };
