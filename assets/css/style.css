@@ -5,15 +5,15 @@ input[type=text] {
   font-family: "Open Sans", sans-serif;
   width: 15em;
   height: 0.5em;
-  border-radius: 0;
   font-size: 0.8em;
   padding: 1em;
+  background: #000000;
   background: rgba(255, 255, 255, 0.5);
   margin: 0 0 10px 0;
+  border-radius: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-
 }
 input card-expiry-month {
   width: 4.5em;
@@ -29,9 +29,8 @@ button {
   margin: 15px 0;
   border: 0 none;
   cursor: pointer;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
   background: #45b2e8;
+  border-radius: 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -43,12 +42,9 @@ button {
 .pm-payment-form-container {
   border: thin #f4f4f4 solid;
   border-radius: 10px;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.75);
   padding-left: 20px;
   padding-right: 20px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.75);
 }
 .img-padding {
   padding: 10px;
