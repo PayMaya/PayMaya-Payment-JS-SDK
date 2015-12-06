@@ -29,8 +29,7 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
   var dataArr;
   var request;
   var encodedData;
-  var errorMessage,
-    successMessage;
+  var errorMessage;
 
   body = {
     'card': {
