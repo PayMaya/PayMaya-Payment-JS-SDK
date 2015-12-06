@@ -16,10 +16,10 @@ input[type=text] {
   box-sizing: border-box;
 }
 input.card-expiry-month {
-  width: 4.5em;
+  width: 6.35em;
 }
 input.card-expiry-year {
-  width: 8em;
+  width: 8.25em;
 }
 button {
   font-family: "Open Sans", sans-serif;
