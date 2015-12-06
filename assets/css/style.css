@@ -15,10 +15,10 @@ input[type=text] {
   box-sizing: border-box;
 
 }
-input.card-expiry-month {
+input card-expiry-month {
   width: 4.5em;
 }
-input.card-expiry-year {
+input card-expiry-year {
   width: 8em;
 }
 button {
@@ -32,6 +32,9 @@ button {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   background: #45b2e8;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .form-container {
   margin: 0 auto;
@@ -43,6 +46,9 @@ button {
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.75);
   padding-left: 20px;
   padding-right: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .img-padding {
   padding: 10px;
