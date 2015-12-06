@@ -11,10 +11,10 @@ input[type=text] {
   background: rgba(255, 255, 255, 0.5);
   margin: 0 0 10px 0;
 }
-input.card-expiry-month {
+.card-expiry-month {
   width: 4.5em;
 }
-input.card-expiry-year {
+.card-expiry-year {
   width: 8em;
 }
 button {
