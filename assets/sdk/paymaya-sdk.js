@@ -108,28 +108,28 @@ PayMaya.Payments.onFormProcessing = function(pfKey, paymentForm, formObj) {
 
 };
 
-PayMaya.Payments.getXMLHttpRequest = function () {
+PayMaya.Payments.getXMLHttpRequest = function() {
 
-    var xhttp = null;
-    
-    if (window.XMLHttpRequest) {
-      // Firefox, Opera 8.0+, Safari
-      xhttp = new window.XMLHttpRequest();
+  var xhttp = null;
 
-    } else {
+  if (window.XMLHttpRequest) {
+    // Firefox, Opera 8.0+, Safari
+    xhttp = new window.XMLHttpRequest();
 
-      try {
-        // Internet Explorer
-        xhttp = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+  } else {
 
-      } catch (ex) {
+    try {
+      // Internet Explorer
+      xhttp = new ActiveXObject("MSXML2.XMLHTTP.3.0");
 
-        return null;
+    } catch (ex) {
 
-      }
+      return null;
 
     }
 
-    return xhttp;
+  }
 
-  };
+  return xhttp;
+
+};
