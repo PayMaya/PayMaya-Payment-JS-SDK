@@ -51,7 +51,7 @@ module.exports = function(grunt) {
 
     asset_cachebuster: {
       options: {
-      	buster: '0.1.0',
+      	buster: '0.1',
         ignore: [],
         htmlExtension: 'html'
       },
