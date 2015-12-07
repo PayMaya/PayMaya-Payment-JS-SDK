@@ -2,9 +2,9 @@ button {
   background: #45b2e8;
   border: 0 none;
   border-radius: 5px;
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  box-sizing: border-box;
   cursor: pointer;
   font-family: "Open Sans", sans-serif;
   font-size: 1em;
@@ -26,9 +26,9 @@ input[type= text] {
   background: #000000;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 0;
-  box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
   font-size: 0.8em;
   height: 0.5em;
