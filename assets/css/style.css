@@ -1,16 +1,13 @@
 button {
-  background: #45b2e8;
-  border: 0 none;
-  border-radius: 5px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-family: "Open Sans", sans-serif;
-  font-size: 1em;
-  margin: 15px 0;
-  padding: 10px 15px;
-  width: 220px;
+ background: #45b2e8;
+ border: 0 none;
+ border-radius: 5px;
+ cursor: pointer;
+ font-family: "Open Sans", sans-serif;
+ font-size: 1em;
+ margin: 15px 0;
+ padding: 10px 15px;
+ width: 220px;
 }
 .centered {
   text-align: center;
