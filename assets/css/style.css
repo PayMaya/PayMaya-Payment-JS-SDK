@@ -22,13 +22,6 @@ button {
 .img-padding {
   padding: 10px;
 }
-input.card-expiry-month {
-  width: 6.35em;
-}
-
-input.card-expiry-year {
-  width: 8.25em;
-}
 input[type= text] {
   background: #000000;
   background: rgba(255, 255, 255, 0.5);
@@ -42,6 +35,12 @@ input[type= text] {
   margin: 0 0 10px 0;
   padding: 1em;
   width: 15em;
+  .card-expiry-month {
+  width: 6.35em;
+  }
+  .card-expiry-year {
+  width: 8.25em;
+  }
 }
 .pm-payment-form-container {
   border: thin #f4f4f4 solid;
