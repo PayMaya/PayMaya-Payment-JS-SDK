@@ -35,12 +35,12 @@ input[type= text] {
   margin: 0 0 10px 0;
   padding: 1em;
   width: 15em;
-  .card-expiry-month {
+}
+input.card-expiry-month {
   width: 6.35em;
-  }
-  .card-expiry-year {
+}
+input.card-expiry-year {
   width: 8.25em;
-  }
 }
 .pm-payment-form-container {
   border: thin #f4f4f4 solid;
