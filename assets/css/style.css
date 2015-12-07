@@ -36,12 +36,6 @@ input[type= text] {
   padding: 1em;
   width: 15em;
 }
-input.card-expiry-month {
-  width: 6.35em;
-}
-input.card-expiry-year {
-  width: 8.25em;
-}
 .pm-payment-form-container {
   border: thin #f4f4f4 solid;
   border-radius: 10px;
