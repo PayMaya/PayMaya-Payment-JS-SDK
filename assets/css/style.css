@@ -14,14 +14,14 @@ input[type=text] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
 
-.card-expiry-month {
+input.card-expiry-month {
   width: 6.35em;
 }
 
-.card-expiry-year {
+input.card-expiry-year {
   width: 8.25em;
-}
 }
 
 button {
