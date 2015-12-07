@@ -133,3 +133,4 @@ PayMaya.Payments.getXMLHttpRequest = function() {
   return xhttp;
 
 };
+  
