@@ -14,9 +14,16 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      dist: {
-        files: {
-          '<%= meta.sdkDistPath %>paymaya-sdk.min.js': ['<%= meta.sdkAssetsPath %>paymaya-sdk.js']
+     dist: {
+       files: {
+         '<%= meta.sdkDistPath %>paymaya-sdk.min.js': ['<%= meta.sdkAssetsPath %>paymaya-sdk.js']
+       }
+     },
+     comments: {
+        src: '<%= meta.sdkAssetsPath %>paymaya-sdk.js',
+        dest: '<%= meta.sdkDistPath %>paymaya-sdk.min.js',
+        options: {
+          preserveComments: 'some'
         }
       }
     },

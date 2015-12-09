@@ -1,4 +1,4 @@
-/* global ActiveXObject: false */
+/*! global ActiveXObject: false */
 var PayMaya = PayMaya || {};
 
 PayMaya.Payments = function(pfKey) {
@@ -113,13 +113,11 @@ PayMaya.Payments.getXMLHttpRequest = function() {
   var xhttp = null;
 
   if (window.XMLHttpRequest) {
-    // Chome, Firefox, Opera 8.0+, Safari
     xhttp = new window.XMLHttpRequest();
 
   } else {
 
     try {
-      // Internet Explorer
       xhttp = new ActiveXObject("MSXML2.XMLHTTP.3.0");
 
     } catch (ex) {
