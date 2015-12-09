@@ -23,6 +23,7 @@ module.exports = function(grunt) {
         src: '<%= meta.sdkAssetsPath %>paymaya-sdk.js',
         dest: '<%= meta.sdkDistPath %>paymaya-sdk.min.js',
         options: {
+          mangle: false,
           preserveComments: 'some'
         }
       }
