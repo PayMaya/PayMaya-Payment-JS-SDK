@@ -1,4 +1,4 @@
-/*! global ActiveXObject: false */
+/* global ActiveXObject: false */
 var PayMaya = PayMaya || {};
 
 PayMaya.Payments = function(pfKey) {
