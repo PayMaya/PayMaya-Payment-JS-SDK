@@ -1,3 +1,4 @@
+// TEST
 // constructor
 // createPaymentToken
 //var expect = chai.expect;

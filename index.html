@@ -35,7 +35,8 @@
     var cardExpiryYear = paymentForm.querySelector("#card-expiry-year");
     var validation = document.querySelector('.validation');
     var paymentFormSubmitBtn = paymentForm.querySelector("#submit-button");
-   
+    var payMayaPayments = new PayMaya.Payments(paymayaPublicKey);   
+       
     paymentForm.onsubmit = function(e) {
       
       // Preventing the default behavior
@@ -49,8 +50,7 @@
         // Disable the submit button to prevent repeated clicks
         paymentFormSubmitBtn.setAttribute('disabled', false);
       
-        // Generate a PaymentToken
-        var payMayaPayments = new PayMaya.Payments(paymayaPublicKey);
+        // Generate a PaymentToken     
         payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
       }
       
