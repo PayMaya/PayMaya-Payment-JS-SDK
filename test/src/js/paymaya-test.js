@@ -1,5 +1,3 @@
-// http://blog.codeship.com/mocha-js-chai-sinon-frontend-javascript-code-testing-tutorial/
-// TEST
 // constructor
 // createPaymentToken
 //var expect = chai.expect;
