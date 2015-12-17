@@ -5,7 +5,6 @@ PayMaya.Payments = function(pfKey) {
 
   this.pfKey = pfKey;
 
-  // Private Method/function
   var getXMLHttpRequest = function getXMLHttpRequest() {
 
     var xhttp = null;
@@ -32,19 +31,13 @@ PayMaya.Payments = function(pfKey) {
 
   };  
 
-  // Private Method/function
   this.onFormProcessing = function onFormProcessing(pfKey, paymentForm, formObj) {
 
     var body;
     var dataArr;
     var request;
     var encodedData;
-    var errorMessage;
-
-    /* if(paymentForm === "") {
-      errorMessage = 'Please specify a css class id in your form tag.';
-      return formObj.failure(errorMessage);
-    } */   
+    var errorMessage;  
 
     body = {
       'card': {
@@ -67,13 +60,12 @@ PayMaya.Payments = function(pfKey) {
 
       request.onreadystatechange = function() {
 
-        if (request.readyState === 4 /* All the data has been received */ ) {
+        if (request.readyState === 4) {
 
-          if (request.status === 200) /* Success */ {
+          if (request.status === 200) {
 
             dataArr = JSON.parse(request.responseText);
 
-            // When form processing: Success
             if (dataArr.hasOwnProperty("id") && dataArr.id !== "" && dataArr.state === "created") {
 
               return formObj.success(dataArr);
@@ -85,12 +77,8 @@ PayMaya.Payments = function(pfKey) {
 
             }
 
-            // When form processing: Failed
-            // If has a category property and category value is "payments-error"
             if (dataArr.hasOwnProperty("category") && dataArr.category === "payments-error") {
 
-              // Process if has an error
-              // Idempotence Error code
               if (dataArr.code === "5001") {
 
                 return formObj.failure(dataArr.message);
@@ -101,7 +89,6 @@ PayMaya.Payments = function(pfKey) {
 
           } else {
 
-            // Error Codes and Responses
             errorMessage = 'Error';
             return formObj.failure(errorMessage);
 
