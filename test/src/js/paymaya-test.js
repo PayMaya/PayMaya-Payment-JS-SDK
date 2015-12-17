@@ -16,7 +16,7 @@ var cardCvc = "123";
 var cardExpiryMonth = "12";
 // Format: MM
 var cardExpiryYear = "2016";
-// Format: 2016
+// Format: YYYY
 
 // var validation = "";
 // var paymentFormSubmitBtn = "";
@@ -102,7 +102,7 @@ describe("PayMaya.Payments", function() {
       var cardNumber = "4242424242424242";
       var cardCvc = "123";
       var cardExpiryMonth = "12"; // Format: MM
-      var cardExpiryYear = "2016"; // Format: 2016
+      var cardExpiryYear = "2016"; // Format: YYYY
 
       var success = function() {};
       var failure = function() {};      
@@ -124,7 +124,7 @@ describe("PayMaya.Payments", function() {
       var cardNumber = "4242424242424242";
       var cardCvc = "123";
       var cardExpiryMonth = "12"; // Format: MM
-      var cardExpiryYear = "2016"; // Format: 2016
+      var cardExpiryYear = "2016"; // Format: YYYY
 
       var success = function() {};
       var failure = function() {};      
@@ -156,7 +156,7 @@ describe("PayMaya.Payments", function() {
       var cardNumber = "4242424242424242";
       var cardCvc = "123";
       var cardExpiryMonth = "12"; // Format: MM
-      var cardExpiryYear = "2016"; // Format: 2016
+      var cardExpiryYear = "2016"; // Format: YYYY
 
       var success = function(paymentToken) { return paymentToken.id };
 
