@@ -128,22 +128,7 @@ PayMaya.Payments = function(pfKey) {
 PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure) {
 
   this.paymentForm = paymentForm;
-  /*this.cardNumber = cardNumber; // cardNumber.value;
-  this.cardCvc = cardCvc; //cardCvc.value;
-  this.cardExpiryMonth = cardExpiryMonth; // cardExpiryMonth.value;
-  this.cardExpiryYear = cardExpiryYear; // cardExpiryYear.value;
-  this.success = success;
-  this.failure = failure;
-
-  this.formObj = {
-    cardNumber: this.cardNumber,
-    cardCvc: this.cardCvc,
-    cardExpiryMonth: this.cardExpiryMonth,
-    cardExpiryYear: this.cardExpiryYear,
-    success: this.success,
-    failure: this.failure
-  };*/
-
+  
   this.formObj = {
     cardNumber: cardNumber,
     cardCvc: cardCvc,
@@ -156,6 +141,4 @@ PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber
   return this.onFormProcessing(this.pfKey, this.paymentForm, this.formObj);
 
 };
-
-
   
