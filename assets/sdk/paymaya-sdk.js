@@ -41,6 +41,11 @@ PayMaya.Payments = function(pfKey) {
     var encodedData;
     var errorMessage;
 
+    /*if(paymentForm === "") {
+      errorMessage = 'Please specify a css class id in your form tag.';
+      return formObj.failure(errorMessage);
+    }*/   
+
     body = {
       'card': {
         'number': formObj.cardNumber,
@@ -71,12 +76,12 @@ PayMaya.Payments = function(pfKey) {
             // When form processing: Success
             if (dataArr.hasOwnProperty("id") && dataArr.id !== "" && dataArr.state === "created") {
 
-              formObj.success(dataArr);
+              return formObj.success(dataArr);
 
             } else if (dataArr.hasOwnProperty("id") && dataArr.id !== "" && dataArr.state === "used") {
 
               errorMessage = 'State has been change from "created" to "used"';
-              formObj.failure(errorMessage);
+              return formObj.failure(errorMessage);
 
             }
 
@@ -88,7 +93,7 @@ PayMaya.Payments = function(pfKey) {
               // Idempotence Error code
               if (dataArr.code === "5001") {
 
-                formObj.failure(dataArr.message);
+                return formObj.failure(dataArr.message);
 
               }
 
@@ -98,7 +103,7 @@ PayMaya.Payments = function(pfKey) {
 
             // Error Codes and Responses
             errorMessage = 'Error';
-            formObj.failure(errorMessage);
+            return formObj.failure(errorMessage);
 
           }
 
@@ -111,7 +116,7 @@ PayMaya.Payments = function(pfKey) {
     } else {
 
       errorMessage = 'AJAX (XMLHTTP) not supported.';
-      formObj.failure(errorMessage);
+      return formObj.failure(errorMessage);
 
     }
 
@@ -119,10 +124,11 @@ PayMaya.Payments = function(pfKey) {
 
 };
 
+//PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear) {
 PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure) {
 
   this.paymentForm = paymentForm;
-  this.cardNumber = cardNumber; // cardNumber.value;
+  /*this.cardNumber = cardNumber; // cardNumber.value;
   this.cardCvc = cardCvc; //cardCvc.value;
   this.cardExpiryMonth = cardExpiryMonth; // cardExpiryMonth.value;
   this.cardExpiryYear = cardExpiryYear; // cardExpiryYear.value;
@@ -136,9 +142,20 @@ PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber
     cardExpiryYear: this.cardExpiryYear,
     success: this.success,
     failure: this.failure
-  };
+  };*/
+
+  this.formObj = {
+    cardNumber: cardNumber,
+    cardCvc: cardCvc,
+    cardExpiryMonth: cardExpiryMonth,
+    cardExpiryYear: cardExpiryYear,
+    success: success,
+    failure: failure
+  };  
 
   return this.onFormProcessing(this.pfKey, this.paymentForm, this.formObj);
 
 };
+
+
   
