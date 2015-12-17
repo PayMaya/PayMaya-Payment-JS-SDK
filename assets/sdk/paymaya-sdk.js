@@ -5,7 +5,7 @@ PayMaya.Payments = function(pfKey) {
 
   this.pfKey = pfKey;
 
-  //Private Method/function
+  // Private Method/function
   var getXMLHttpRequest = function getXMLHttpRequest() {
 
     var xhttp = null;
@@ -32,7 +32,7 @@ PayMaya.Payments = function(pfKey) {
 
   };  
 
-  //Private Method/function
+  // Private Method/function
   this.onFormProcessing = function onFormProcessing(pfKey, paymentForm, formObj) {
 
     var body;
@@ -41,10 +41,10 @@ PayMaya.Payments = function(pfKey) {
     var encodedData;
     var errorMessage;
 
-    /*if(paymentForm === "") {
+    /* if(paymentForm === "") {
       errorMessage = 'Please specify a css class id in your form tag.';
       return formObj.failure(errorMessage);
-    }*/   
+    } */   
 
     body = {
       'card': {
@@ -124,7 +124,6 @@ PayMaya.Payments = function(pfKey) {
 
 };
 
-//PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear) {
 PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure) {
 
   this.paymentForm = paymentForm;
