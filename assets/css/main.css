@@ -1,0 +1,20 @@
+.form-container {
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 3px;
+  background-color: #d3d3d3; }
+
+.form-title {
+  color: #a9a9a9; }
+
+.img-padding {
+  padding: 1rem; }
+
+.validation {
+  font-size: .75rem;
+  line-height: 2;
+  color: #ff0000;
+  word-wrap: break-word;
+  margin: 0 0 0.65rem 0; }
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,44 @@
+// Default light-gray color
+$light-gray: #d3d3d3;
+// Default medium-gray color
+$medium-gray: #cacaca;
+// Default dark-gray color
+$dark-gray: #a9a9a9;
+// Default red color
+$red: #ff0000;
+// Default global padding
+$global-padding: 1rem;
+// Global value used for all elements that have a border radius.
+$global-radius: 3px; 
+
+// Setting the form background-color
+$form-background-color: $light-gray;
+// Setting the form border color
+$form-border-color: $medium-gray;
+// Setting the form padding
+$form-padding: $global-padding;
+// Setting the form border radius
+$form-radius: $global-radius;
+
+.form-container {
+  border: 1px solid $form-border-color;
+  padding: $form-padding;
+  border-radius: $form-radius;
+  background-color: $form-background-color;
+}
+
+.form-title {
+  color: $dark-gray;
+}
+
+.img-padding {
+  padding: $global-padding;
+}
+
+.validation {
+  font-size: .75rem;
+  line-height: 2;
+  color: $red;
+  word-wrap: break-word;
+  margin: 0 0 0.65rem 0;
+}

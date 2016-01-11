@@ -1,27 +1,115 @@
-"use strict";
-
 module.exports = function(grunt) {
 
-  grunt.initConfig({
+  // Load all files starting with `grunt-`
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-    pkg: grunt.file.readJSON('package.json'),
+  var pkg = grunt.file.readJSON('package.json');
+
+  grunt.initConfig({
+    pkg: pkg,
 
     meta: {
-      cssDistPath: 'dist/css/',
-      sdkDistPath: 'dist/sdk/',
+      imgAssetsPath: 'assets/img/',
       cssAssetsPath: 'assets/css/',
-      sdkAssetsPath: 'assets/sdk/'
+      sassAssetsPath: 'assets/sass/',
+      sdkAssetsPath: 'assets/sdk/',
+      imgDistPath: 'dist/img/',
+      cssDistPath: 'dist/css/',
+      sdkDistPath: 'dist/sdk/'
+    },
+
+    clean: {
+      release: ["dist"],
+    },
+
+    // JsHint
+    jshint: {
+      //options: pkg.jshintConfig,
+      all: ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js']
+    },
+
+    // Watch
+    watch: {
+      options: {
+        spawn: false,
+        dateFormat: function(time) {
+          grunt.log.writeln('The watch finished in ' + time + 'ms at' + (new Date()).toString());
+          grunt.log.writeln('Waiting for more changes...');
+        },
+      },
+      src: {
+        files: ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.cssAssetsPath %>*.css', '<%= meta.imgAssetsPath %>*.{png,gif,jpg,svg}', '<%= meta.sdkDistPath %>*.js', '<%= meta.cssDistPath %>*.css', '<%= meta.imgDistPath %>*.{png,gif,jpg,svg}'],
+        tasks: ['default'],
+      },
+
+      min: {
+        files: ['<%= meta.sdkDistPath %>*.js', '<%= meta.cssDistPath %>*.css'],
+        tasks: ['uglify:dist', 'cssmin'],
+        options: {
+          atBegin: true
+        }
+      }
+
+    },
+
+    /// userminPrepare
+    useminPrepare: {
+      html: 'assets/index.html',
+      //html: 'index.html',
+      options: {
+        dest: 'dist'
+      },
+    },
+
+    // Usemin
+    // Replaces all assets with their revved version in html and css files.
+    // options.assetDirs contains the directories for finding the assets
+    // according to their relative paths
+
+    // usemin has access to the revved files mapping through grunt.filerev.summary
+
+    usemin: {
+      html: 'index.html',
+      css: ['<%= meta.cssDistPath %>*.css'],
+      js: ['<%= meta.sdkDistPath %>*.js'],
+      options: {
+        patterns: {
+          templates: [
+            [/<img[^\>]+src=['"]([^"']+)["']/gm, 'Update the templates with the new img filenames']
+          ]
+        },
+      },
+    },
+
+    // Concat
+    concat: {
+      options: {
+        separator: ';'
+      },
+      // dist configuration is provided by useminPrepare
+      dist: {},
+      generated: {
+        files: [{
+          dest: '.tmp/concat/dist/sdk/paymaya.min.js',
+          src: ['<%= meta.sdkAssetsPath %>paymaya.js']
+        }]
+      }
     },
 
     uglify: {
-     dist: {
-       files: {
-         '<%= meta.sdkDistPath %>paymaya-sdk.min.js': ['<%= meta.sdkAssetsPath %>paymaya-sdk.js']
-       }
-     },
-     comments: {
-        src: '<%= meta.sdkAssetsPath %>paymaya-sdk.js',
-        dest: '<%= meta.sdkDistPath %>paymaya-sdk.min.js',
+      dist: {},
+      generated: {
+        options: {
+          sourceMap: true
+        },
+        files: [{
+          dest: '<%= meta.sdkDistPath %>paymaya.min.js',
+          src: ['.tmp/concat/dist/sdk/paymaya.min.js']
+        }]
+      },
+      comments: {
+        src: '.tmp/concat/dist/sdk/paymaya.min.js',
+        dest: '<%= meta.sdkDistPath %>paymaya.min.js',
         options: {
           mangle: false,
           preserveComments: 'some'
@@ -29,8 +117,19 @@ module.exports = function(grunt) {
       }
     },
 
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          '<%= meta.cssAssetsPath %>main.css': '<%= meta.sassAssetsPath %>main.scss'
+        }
+      }
+    },
+
     cssmin: {
-      target: {
+      /*generated: {
         files: [{
           expand: true,
           cwd: '<%= meta.cssAssetsPath %>',
@@ -38,44 +137,67 @@ module.exports = function(grunt) {
           dest: '<%= meta.cssDistPath %>',
           ext: '.min.css'
         }]
-      }
-    },
-    watch: {
-      dev: {
-        files: ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.sdkDistPath %>*.js', '*.html'],
-        tasks: ['uglify:dist'],
-        options: {
-          atBegin: true
-        }
-      },
-      min: {
-        files: ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.sdkDistPath %>*.js', '*.html'],
-        tasks: ['uglify:dist'],
-        options: {
-          atBegin: true
+      }*/
+      generated: {
+        files: {
+          '<%= meta.cssDistPath %>style.min.css': ['<%= meta.cssAssetsPath %>foundation.css', '<%= meta.cssAssetsPath %>main.css']
         }
       }
     },
 
-    asset_cachebuster: {
+    copy: {
+      // copy:release copies all html and image files to dist
+      // preserving the structure
+      release: {
+        files: [{
+          expand: true,
+          cwd: 'assets',
+          src: [
+            'img/*.{png,gif,jpg,svg}',
+            //'css/*.css',
+            //'sdk/*.js',
+            'index.html'
+          ],
+          dest: 'dist/',
+          /*options: {
+            process: function(content, srcpath) {
+              return content.replace(/[dist/sdk/paymaya.min.*.js]/, "dist/sdk/paymaya.min.js");
+            },
+          },*/
+        }]
+      }
+    },
+
+    imagemin: {
+      dist: {
+        options: {
+          optimizationLevel: 5
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= meta.imgAssetsPath %>',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: '<%= meta.imgDistPath %>'
+        }]
+      }
+    },
+
+    // Filerev
+    filerev: {
       options: {
-        buster: '0.1.0',
-        ignore: [],
-        htmlExtension: 'html'
+        encoding: 'utf8',
+        algorithm: 'md5',
+        length: 8
       },
-      build: {
-        files: {
-          '<%= meta.sdkDistPath %>paymaya-sdk.min.js': ['<%= meta.sdkDistPath %>paymaya-sdk.min.js'],
-          '<%= meta.cssDistPath %>style.min.css': ['<%= meta.cssDistPath %>style.min.css'],
-          'index.html': ['index.html']
-        }
+      release: {
+        // filerev:release hashes(md5) all assets (images, js and css )
+        // in dist directory
+        files: [{
+          src: ['<%= meta.imgDistPath %>*.{png,gif,jpg,svg}', '<%= meta.sdkDistPath %>*.js', '<%= meta.cssDistPath %>*.min.css']
+        }]
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-asset-cachebuster');
-  grunt.registerTask('default', ['uglify', 'cssmin', 'asset_cachebuster']);
+  grunt.registerTask('default', ['clean:release', 'jshint', 'useminPrepare', 'concat:generated', 'sass', 'cssmin:generated', 'imagemin', 'uglify:generated', 'uglify:comments', 'copy:release', 'filerev', 'usemin']);
 };

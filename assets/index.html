@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>PayaMaya Payment SDK</title>
-     <script src="dist/sdk/paymaya.min.44386d28.js"></script>
-    <link href="dist/css/style.min.3228c753.css" rel="stylesheet">
+     <script src="dist/sdk/paymaya.min.js"></script>
+    <link href="dist/css/style.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="row">
@@ -12,7 +12,7 @@
         <form id="payment-form" action="#" method="POST">
           <div class="row column">
             <div class="twelve columns text-center">
-              <img class="img-padding" src="dist/img/store-logo.5bca0848.png">
+              <img class="img-padding" src="dist/img/store-logo.png">
             </div>
             <h2 class="text-center form-title">YOUR ONLINE STORE</h2>
           </div>
@@ -42,7 +42,9 @@
     </div>
     <script>
       var url = 'https://api.paymaya.com/sandbox/payments/payment-tokens';
-      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";     
+      //var paymayaPublicKey = "bee386662c04e4c6f872b5d4b13b7b87bd84ac68f3a95b8998298b32cd";
+      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
+      
       var paymentForm = document.querySelector("#payment-form");
       var cardNumber = paymentForm.querySelector("#card-number");
       var cardCvc = paymentForm.querySelector("#card-cvc");

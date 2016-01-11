@@ -1,9 +1,10 @@
 /* global ActiveXObject: false */
 var PayMaya = PayMaya || {};
 
-PayMaya.Payments = function(pfKey) {
+PayMaya.Payments = function(url, pfKey) {
 
   this.pfKey = pfKey;
+  this.url = url;
 
   var getXMLHttpRequest = function getXMLHttpRequest() {
 
@@ -33,12 +34,14 @@ PayMaya.Payments = function(pfKey) {
 
   this.onFormProcessing = function onFormProcessing(pfKey, paymentForm, formObj) {
 
+    var url = this.url;
     var body;
     var dataArr;
     var request;
     var encodedData;
     var errorMessage;  
 
+    console.log(url);
     body = {
       'card': {
         'number': formObj.cardNumber,
@@ -48,11 +51,12 @@ PayMaya.Payments = function(pfKey) {
       }
     };
 
+    //console.log(body.card);
+
     request = getXMLHttpRequest();
 
     if (request !== null) {
-
-      request.open('POST', 'http://private-anon-5c87df497-paymayapaymentsapi.apiary-mock.com/payment-tokens');
+      request.open('POST', url, true);
       request.setRequestHeader('Content-Type', 'application/json');
 
       encodedData = btoa(pfKey);
@@ -62,15 +66,20 @@ PayMaya.Payments = function(pfKey) {
 
         if (request.readyState === 4) {
 
+            console.log('Status:', this.status);
+            console.log('Headers:', this.getAllResponseHeaders());
+
           if (request.status === 200) {
 
             dataArr = JSON.parse(request.responseText);
 
-            if (dataArr.hasOwnProperty("id") && dataArr.id !== "" && dataArr.state === "created") {
+            console.log(dataArr);
+
+            if (dataArr.hasOwnProperty("paymentTokenId") && dataArr.paymentTokenId !== "" && dataArr.state === "created") {
 
               return formObj.success(dataArr);
 
-            } else if (dataArr.hasOwnProperty("id") && dataArr.id !== "" && dataArr.state === "used") {
+            } else if (dataArr.hasOwnProperty("paymentTokenId") && dataArr.paymentTokenId !== "" && dataArr.state === "used") {
 
               errorMessage = 'State has been change from "created" to "used"';
               return formObj.failure(errorMessage);
@@ -116,10 +125,10 @@ PayMaya.Payments.prototype.createPaymentToken = function(paymentForm, cardNumber
   this.paymentForm = paymentForm;
   
   this.formObj = {
-    cardNumber: cardNumber,
-    cardCvc: cardCvc,
-    cardExpiryMonth: cardExpiryMonth,
-    cardExpiryYear: cardExpiryYear,
+    cardNumber: cardNumber.value,
+    cardCvc: cardCvc.value,
+    cardExpiryMonth: cardExpiryMonth.value,
+    cardExpiryYear: cardExpiryYear.value,
     success: success,
     failure: failure
   };  
