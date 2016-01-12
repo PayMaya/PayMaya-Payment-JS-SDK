@@ -9,9 +9,8 @@ var stub = sinon.stub();
 var spyCallback = sinon.spy();
 spyCallback(); // Invoke the spy callback function
 
-var url = 'https://api.paymaya.com/sandbox/payments/payment-tokens';
+var env = "sandbox"; //production
 var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
-console.log(paymayaPublicKey);
 var paymentForm = "#payment-form";
 var cardNumber = "4242424242424242";
 var cardCvc = "123";
@@ -25,6 +24,7 @@ var cardExpiryYear = "2016";
 var success = function() {};
 var failure = function() {};
 
+
 describe("PayMaya.Payments", function() {
 
   describe("constructor", function() {
@@ -32,7 +32,7 @@ describe("PayMaya.Payments", function() {
     it("should set a paymaya's public facing key (pfKey) if provided", function() {
 
       // var payMayaPayments = new PayMaya.Payments("pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu");
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
 
       // ASSERT
       assert.equal(payMayaPayments.pfKey, "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu:");
@@ -45,7 +45,7 @@ describe("PayMaya.Payments", function() {
 
     it("should set payment form element id (#paymentForm)", function() {
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
       payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
 
       // ASSERT
@@ -55,11 +55,10 @@ describe("PayMaya.Payments", function() {
 
     it("should set credit card number", function() {
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
       payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
 
       // ASSERT
-      console.log(payMayaPayments.formObj.cardNumber);
       assert.equal(payMayaPayments.formObj.cardNumber, "4242424242424242");
       // assert.equal(payMayaPayments.cardNumber, cardNumber);
       
@@ -67,7 +66,7 @@ describe("PayMaya.Payments", function() {
 
     it("should set credit card cvc", function() {
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
       payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
 
       // ASSERT
@@ -78,7 +77,7 @@ describe("PayMaya.Payments", function() {
 
     it("should set credit card expiry month", function() {
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
       payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
 
       // ASSERT
@@ -89,7 +88,7 @@ describe("PayMaya.Payments", function() {
 
     it("should set credit card expiry year", function() {
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
       payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
 
       // ASSERT
@@ -100,7 +99,7 @@ describe("PayMaya.Payments", function() {
     
     it('should call onFormProcessing once', function() {
       
-      var url = 'https://api.paymaya.com/sandbox/payments/payment-tokens';
+      var env = "sandbox"; //production
       var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
       var paymentForm = "#payment-form";
       var cardNumber = "4242424242424242";
@@ -111,7 +110,7 @@ describe("PayMaya.Payments", function() {
       var success = function() {};
       var failure = function() {};      
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
 
       var onFormProcessing = sinon.spy(payMayaPayments, 'onFormProcessing');
 
@@ -122,42 +121,9 @@ describe("PayMaya.Payments", function() {
 
     });
 
-    it('should pass credit card information and a callback function', function() {
-
-      var url = 'https://api.paymaya.com/sandbox/payments/payment-tokens';
-      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
-      var paymentForm = "#payment-form";
-      var cardNumber = "4242424242424242";
-      var cardCvc = "123";
-      var cardExpiryMonth = "12"; // Format: MM
-      var cardExpiryYear = "2016"; // Format: YYYY
-
-      var success = function() {};
-      var failure = function() {};      
-
-      var formObj = {
-        cardNumber: cardNumber,
-        cardCvc: cardCvc,
-        cardExpiryMonth: cardExpiryMonth,
-        cardExpiryYear: cardExpiryYear,
-        success: success,
-        failure: failure
-      };      
-
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
-
-      var onFormProcessing = sinon.stub(payMayaPayments, 'onFormProcessing');
-
-      payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
-
-      onFormProcessing.restore();      
-      sinon.assert.calledWith(onFormProcessing, paymayaPublicKey, paymentForm, formObj);
-
-    });
-
     it('should pass the payment token id into the success callback', function() {
       
-      var url = 'https://api.paymaya.com/sandbox/payments/payment-tokens';
+      var env = "sandbox"; //production
       var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
       var paymentForm = "#payment-form";
       var cardNumber = "4242424242424242";
@@ -169,7 +135,7 @@ describe("PayMaya.Payments", function() {
 
       var failure = function() {};
 
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
       var createPaymentToken = sinon.stub(payMayaPayments, 'createPaymentToken');
 
       var expectedResult = { success: true };

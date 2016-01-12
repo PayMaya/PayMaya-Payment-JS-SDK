@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>PayaMaya Payment SDK</title>
-     <script src="dist/sdk/paymaya.min.js"></script>
-    <link href="dist/css/style.min.css" rel="stylesheet">
+     <script src="dist/sdk/paymaya.min.js"></script>  <!-- TODO - filerev / versioning not updating. See gruntfile config -->     
+    <link href="dist/css/style.min.css" rel="stylesheet">  <!-- TODO - filerev / versioning not updating. See gruntfile config -->  
   </head>
   <body>
     <div class="row">
@@ -12,13 +12,12 @@
         <form id="payment-form" action="#" method="POST">
           <div class="row column">
             <div class="twelve columns text-center">
-              <img class="img-padding" src="dist/img/store-logo.png">
+              <img class="img-padding" src="dist/img/store-logo.png"> <!-- TODO - filerev / versioning not updating. See gruntfile config -->  
             </div>
             <h2 class="text-center form-title">YOUR ONLINE STORE</h2>
           </div>
           <div class="row column form-container">
             <input type="text" name="card-number" class="card-number" id="card-number" size="16" value="" placeholder="Card number" maxlength="16" />
-            <input type="text" name="card-name" class="card-name" id="card-name" value="" placeholder="Cardholder Name" />
             <div class="row">
               <div class="large-3 columns">
                 <input type="text" name="card-expiry-month" class="card-expiry-month" id="card-expiry-month" size="2" value="" placeholder="MM" maxlength="2" />
@@ -41,10 +40,8 @@
       </div>
     </div>
     <script>
-      var url = 'https://api.paymaya.com/sandbox/payments/payment-tokens';
-      //var paymayaPublicKey = "bee386662c04e4c6f872b5d4b13b7b87bd84ac68f3a95b8998298b32cd";
-      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
-      
+      var env = "sandbox";
+      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";     
       var paymentForm = document.querySelector("#payment-form");
       var cardNumber = paymentForm.querySelector("#card-number");
       var cardCvc = paymentForm.querySelector("#card-cvc");
@@ -52,7 +49,7 @@
       var cardExpiryYear = paymentForm.querySelector("#card-expiry-year");
       var validation = document.querySelector('.validation');
       var paymentFormSubmitBtn = paymentForm.querySelector("#submit-button");
-      var payMayaPayments = new PayMaya.Payments(url, paymayaPublicKey + ':');   
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');   
          
       paymentForm.onsubmit = function(e) {
 
