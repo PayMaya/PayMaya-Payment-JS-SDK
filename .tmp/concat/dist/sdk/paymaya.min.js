@@ -116,7 +116,7 @@ PayMaya.Payments = function(env, pfKey) {
               errorMessage = 'Error';
               return formObj.failure(errorMessage);
               
-              // TODO - Error codes and responses - https://staging-dev.paymaya.com/docs/e/payments
+              // TODO - Error codes and responses - See documentation, https://staging-dev.paymaya.com/docs/e/payments
 
             }
 
