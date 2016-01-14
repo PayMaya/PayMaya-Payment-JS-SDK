@@ -15,7 +15,8 @@ module.exports = function(grunt) {
       sdkAssetsPath: 'assets/sdk/',
       imgDistPath: 'dist/img/',
       cssDistPath: 'dist/css/',
-      sdkDistPath: 'dist/sdk/'
+      sdkDistPath: 'dist/sdk/',
+      htmlDistPath: 'dist/'
     },
 
     clean: {
@@ -69,16 +70,9 @@ module.exports = function(grunt) {
     // usemin has access to the revved files mapping through grunt.filerev.summary
 
     usemin: {
-      html: 'index.html',
-      css: ['<%= meta.cssDistPath %>*.css'],
+      html: ['<%= meta.htmlDistPath %>index.html'],
       js: ['<%= meta.sdkDistPath %>*.js'],
-      options: {
-        patterns: {
-          templates: [
-            [/<img[^\>]+src=['"]([^"']+)["']/gm, 'Update the templates with the new img filenames']
-          ]
-        },
-      },
+      css: ['<%= meta.cssDistPath %>*.css']
     },
 
     // Concat
@@ -193,7 +187,9 @@ module.exports = function(grunt) {
         // filerev:release hashes(md5) all assets (images, js and css )
         // in dist directory
         files: [{
-          src: ['<%= meta.imgDistPath %>*.{png,gif,jpg,svg}', '<%= meta.sdkDistPath %>*.js', '<%= meta.cssDistPath %>*.min.css']
+          src: ['<%= meta.imgDistPath %>*.{png,gif,jpg,svg}',
+                '<%= meta.sdkDistPath %>*.js',
+                '<%= meta.cssDistPath %>*.min.css']
         }]
       }
     }

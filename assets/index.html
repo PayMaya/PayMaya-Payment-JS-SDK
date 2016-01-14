@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>PayaMaya Payment SDK</title>
-     <script src="dist/sdk/paymaya.min.js"></script>  <!-- TODO - filerev / versioning not updating. See gruntfile config -->     
-    <link href="dist/css/style.min.css" rel="stylesheet">  <!-- TODO - filerev / versioning not updating. See gruntfile config -->  
+    <title>PayMaya Payment SDK</title>
+    <script src="./sdk/paymaya.min.js"></script>
+    <link href="./css/style.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="row">
@@ -12,7 +12,7 @@
         <form id="payment-form" action="#" method="POST">
           <div class="row column">
             <div class="twelve columns text-center">
-              <img class="img-padding" src="dist/img/store-logo.png"> <!-- TODO - filerev / versioning not updating. See gruntfile config -->  
+              <img class="img-padding" src="./img/store-logo.png">
             </div>
             <h2 class="text-center form-title">YOUR ONLINE STORE</h2>
           </div>
@@ -41,7 +41,7 @@
     </div>
     <script>
       var env = "sandbox";
-      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";     
+      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
       var paymentForm = document.querySelector("#payment-form");
       var cardNumber = paymentForm.querySelector("#card-number");
       var cardCvc = paymentForm.querySelector("#card-cvc");
@@ -49,30 +49,30 @@
       var cardExpiryYear = paymentForm.querySelector("#card-expiry-year");
       var validation = document.querySelector('.validation');
       var paymentFormSubmitBtn = paymentForm.querySelector("#submit-button");
-      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');   
-         
+      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
+
       paymentForm.onsubmit = function(e) {
 
         // Preventing the default behavior
         e.preventDefault();
-        
+
         // Basic client side validation - Check input data if empty or missing
         if (cardNumber.value === "" || cardCvc.value === "" || cardExpiryMonth.value === "" || cardExpiryYear.value === "") {
           document.querySelector(".validation").innerHTML = "Please Input your credit card information";
-        
+
         } else {
           // Disable the submit button to prevent repeated clicks
           paymentFormSubmitBtn.setAttribute('disabled', false);
-        
-          // Generate a PaymentToken     
+
+          // Generate a PaymentToken
           payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
         }
-        
+
         // User-defined callback function
         function success(paymentToken) {
           document.querySelector(".validation").innerHTML = "Successfully made a payment token for " + paymentToken.paymentTokenId;
         }
-      
+
         function failure(error) {
           document.querySelector(".validation").innerHTML = error;
         }
