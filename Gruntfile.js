@@ -20,15 +20,35 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      release: ["dist"],
+      release: ["dist"]
     },
 
     // JsHint
     jshint: {
-      //options: pkg.jshintConfig,
-      all: ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js']
+      options: {
+        "-W032": true,
+        noempty: true,
+        noarg: true,
+        eqeqeq: true,
+        bitwise: true,
+        curly: true,
+        undef: true,
+        validthis: true,
+        nonew: true,
+        forin: true,
+        globals: {
+          browser: true,
+          jquery: true,
+          node: true,
+          "window": true,
+          "document": true
+        }
+      },
+      files:{
+        src: ['<%= meta.sdkAssetsPath %>*.js']
+      }
     },
-
+    
     // Watch
     watch: {
       options: {
