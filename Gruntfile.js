@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         noempty: true,
         noarg: true,
         eqeqeq: true,
-        bitwise: true,
+        bitwise: false,
         curly: true,
         undef: true,
         validthis: true,
@@ -38,10 +38,10 @@ module.exports = function(grunt) {
         forin: true,
         globals: {
           browser: true,
-          jquery: true,
-          node: true,
           "window": true,
-          "document": true
+          "document": true,
+          "console": true,
+	        "PayMaya": true
         }
       },
       files:{
@@ -170,7 +170,8 @@ module.exports = function(grunt) {
             'img/*.{png,gif,jpg,svg}',
             //'css/*.css',
             //'sdk/*.js',
-            'index.html'
+            'index.html',
+	          '*.json'
           ],
           dest: 'dist/',
           /*options: {

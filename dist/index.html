@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>PayMaya Payment SDK</title>
-    <script src="./sdk/paymaya.min.bc36ccc5.js"></script>
+    <script src="./sdk/paymaya.min.js"></script>
     <link href="./css/style.min.3228c753.css" rel="stylesheet">
   </head>
   <body>
@@ -17,16 +17,16 @@
             <h2 class="text-center form-title">YOUR ONLINE STORE</h2>
           </div>
           <div class="row column form-container">
-            <input type="text" name="card-number" class="card-number" id="card-number" size="16" value="" placeholder="Card number" maxlength="16" />
+            <input type="text" name="number" class="card-number" id="card-number" size="16" value="5123456789012346" placeholder="Card number" maxlength="16" />
             <div class="row">
               <div class="large-3 columns">
-                <input type="text" name="card-expiry-month" class="card-expiry-month" id="card-expiry-month" size="2" value="" placeholder="MM" maxlength="2" />
+                <input type="text" name="expMonth" class="card-expiry-month" id="card-expiry-month" size="2" value="05" placeholder="MM" maxlength="2" />
               </div>
               <div class="large-4 columns">
-                <input type="text" name="card-expiry-year" class="card-expiry-year" id="card-expiry-year" size="4" value="" placeholder="YYYY" maxlength="4" />
+                <input type="text" name="expYear" class="card-expiry-year" id="card-expiry-year" size="4" value="2017" placeholder="YYYY" maxlength="4" />
               </div>
               <div class="large-5 columns">
-                <input type="text" name="card-cvc" class="card-cvc" id="card-cvc" size="3" value="" placeholder="CVC" maxlength="3" />
+                <input type="text" name="cvc" class="card-cvc" id="card-cvc" size="3" value="111" placeholder="CVC" maxlength="3" />
               </div>
             </div>
             <div class="validation text-center">
@@ -39,7 +39,40 @@
         </form>
       </div>
     </div>
-    <script>
+
+
+    <!--<div id="paymaya-container">
+      <div id="paymaya-box">
+        <div id="paymaya-border">
+          <iframe id="paymaya-render" src="" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation" frameborder="0" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <script type="text/javascript" charset="UTF-8">
+
+      document.getElementById('payment-form').onsubmit = function(){
+
+        PayMaya.sandbox = true;
+        PayMaya.getTokenID('#payment-form', function(pObj, tokenData){
+
+          pObj.payments('#payment-form', function(paymentsData) {
+            console.info(paymentsData);
+          });
+
+        });
+
+        //Cancel form submit. Just trigger the PayMaya
+        return false;
+      };
+
+      PayMaya.onPaymentSuccess = function(){
+        console.info('Payment Success');
+      };
+
+    </script>
+    <!--<script>
       var env = "sandbox";
       var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
       var paymentForm = document.querySelector("#payment-form");
@@ -77,6 +110,6 @@
           document.querySelector(".validation").innerHTML = error;
         }
       }
-    </script>
+    </script>-->
   </body>
 </html>

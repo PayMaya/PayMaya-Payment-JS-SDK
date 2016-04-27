@@ -17,4 +17,49 @@
   word-wrap: break-word;
   margin: 0 0 0.65rem 0; }
 
+#paymaya-container {
+  /*display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.2);*/
+  /*#paymaya-box{
+    display: block;
+    position: relative;
+    margin-top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+    width: 400px;
+    height: 400px;
+    z-index: 10000;
+    background-color: rgba(0,0,0,0.3);
+  }*/
+  /*#paymaya-render {
+    display: block;
+    position: absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    border: none;
+    overflow: hidden;
+    background-color: #00a000;
+  }*/ }
+  #paymaya-container #paymaya-border {
+    /*display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    overflow: hidden;
+    background-color: #ffffff;*/ }
+
 /*# sourceMappingURL=main.css.map */
