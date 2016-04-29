@@ -171,6 +171,7 @@ module.exports = function(grunt) {
             //'css/*.css',
             //'sdk/*.js',
             'index.html',
+            '*.html',
 	          '*.json'
           ],
           dest: 'dist/',

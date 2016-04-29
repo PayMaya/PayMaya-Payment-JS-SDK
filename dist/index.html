@@ -9,7 +9,7 @@
   <body>
     <div class="row">
       <div class="medium-6 medium-centered large-4 large-centered columns">
-        <form id="payment-form" action="#" method="POST">
+        <form id="payment-form">
           <div class="row column">
             <div class="twelve columns text-center">
               <img class="img-padding" src="./img/store-logo.5bca0848.png">
@@ -44,6 +44,7 @@
     <!--<div id="paymaya-container">
       <div id="paymaya-box">
         <div id="paymaya-border">
+          <div id="paymaya-close"></div>
           <iframe id="paymaya-render" src="" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation" frameborder="0" scrolling="no"></iframe>
         </div>
       </div>
@@ -54,10 +55,40 @@
 
       document.getElementById('payment-form').onsubmit = function(){
 
-        PayMaya.sandbox = true;
+        PayMaya.sandbox = 2;
         PayMaya.getTokenID('#payment-form', function(pObj, tokenData){
 
-          pObj.payments('#payment-form', function(paymentsData) {
+          var obj = {
+            "paymentTokenId": document.body.data.paymentTokenId || '',
+            "totalAmount": {
+              "amount": 100,
+              "currency": "PHP"
+            },
+            "buyer": {
+              "firstName": "Cza",
+              "middleName": "dela",
+              "lastName": "Bongat",
+              "contact": {
+                "phone": "+63(2)1234567890",
+                "email": "paymayabuyer1@gmail.com"
+              },
+              "billingAddress": {
+                "line1": "9F Robinsons Cybergate 3",
+                "line2": "Pioneer Street",
+                "city": "Mandaluyong City",
+                "state": "Metro Manila",
+                "zipCode": "12345",
+                "countryCode": "PH"
+              }
+            },
+            "redirectUrl": {
+              success: "http://localhost:63342/PayMaya-Payment-JS-SDK/dist/success.html",
+              failure: "http://localhost:63342/PayMaya-Payment-JS-SDK/dist/failure.html",
+              cancel: "http://localhost:63342/PayMaya-Payment-JS-SDK/dist/cancel.html"
+            }
+          };
+
+          pObj.payments(obj, function(paymentsData) {
             console.info(paymentsData);
           });
 
@@ -72,44 +103,5 @@
       };
 
     </script>
-    <!--<script>
-      var env = "sandbox";
-      var paymayaPublicKey = "pk-sHQWci2P410ppwFQvsi7IQCpHsIjafy74jrhYb8qfxu";
-      var paymentForm = document.querySelector("#payment-form");
-      var cardNumber = paymentForm.querySelector("#card-number");
-      var cardCvc = paymentForm.querySelector("#card-cvc");
-      var cardExpiryMonth = paymentForm.querySelector("#card-expiry-month");
-      var cardExpiryYear = paymentForm.querySelector("#card-expiry-year");
-      var validation = document.querySelector('.validation');
-      var paymentFormSubmitBtn = paymentForm.querySelector("#submit-button");
-      var payMayaPayments = new PayMaya.Payments(env, paymayaPublicKey + ':');
-
-      paymentForm.onsubmit = function(e) {
-
-        // Preventing the default behavior
-        e.preventDefault();
-
-        // Basic client side validation - Check input data if empty or missing
-        if (cardNumber.value === "" || cardCvc.value === "" || cardExpiryMonth.value === "" || cardExpiryYear.value === "") {
-          document.querySelector(".validation").innerHTML = "Please Input your credit card information";
-
-        } else {
-          // Disable the submit button to prevent repeated clicks
-          paymentFormSubmitBtn.setAttribute('disabled', false);
-
-          // Generate a PaymentToken
-          payMayaPayments.createPaymentToken(paymentForm, cardNumber, cardCvc, cardExpiryMonth, cardExpiryYear, success, failure);
-        }
-
-        // User-defined callback function
-        function success(paymentToken) {
-          document.querySelector(".validation").innerHTML = "Successfully made a payment token for " + paymentToken.paymentTokenId;
-        }
-
-        function failure(error) {
-          document.querySelector(".validation").innerHTML = error;
-        }
-      }
-    </script>-->
   </body>
 </html>
