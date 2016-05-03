@@ -7,8 +7,10 @@
 </head>
 <body>
 	<h1>Cancel Transactions</h1>
-	(function(){
-	PayMaya.removePanel();
-	})(PayMaya);
+	<script>
+		(function(){
+			PayMaya.removePanel(PayMaya.statusPage.canceled);
+		})(PayMaya);
+	</script>
 </body>
 </html>

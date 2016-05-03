@@ -56,10 +56,19 @@
       document.getElementById('payment-form').onsubmit = function(){
 
         PayMaya.sandbox = 2;
+        PayMaya.merchantUrl.payments.get = 'paymentsget.json';
+        PayMaya.merchantUrl.payments.create = 'http://192.168.225.48/paymaya-php-library/payment.php';
+
+        PayMaya.merchantUrl.redirect.success = '/PayMaya-Payment-JS-SDK/dist/success.html';
+        PayMaya.merchantUrl.redirect.failure = '/PayMaya-Payment-JS-SDK/dist/failure.html';
+        PayMaya.merchantUrl.redirect.cancel = '/PayMaya-Payment-JS-SDK/dist/cancel.html';
+
+
         PayMaya.getTokenID('#payment-form', function(pObj, tokenData){
+          var tokend= JSON.parse(tokenData);
 
           var obj = {
-            "paymentTokenId": document.body.data.paymentTokenId || '',
+            "paymentTokenId": tokend.paymentTokenId || '',
             "totalAmount": {
               "amount": 100,
               "currency": "PHP"
@@ -80,11 +89,6 @@
                 "zipCode": "12345",
                 "countryCode": "PH"
               }
-            },
-            "redirectUrl": {
-              success: "http://localhost:63342/PayMaya-Payment-JS-SDK/dist/success.html",
-              failure: "http://localhost:63342/PayMaya-Payment-JS-SDK/dist/failure.html",
-              cancel: "http://localhost:63342/PayMaya-Payment-JS-SDK/dist/cancel.html"
             }
           };
 
@@ -98,8 +102,16 @@
         return false;
       };
 
-      PayMaya.onPaymentSuccess = function(){
-        console.info('Payment Success');
+      PayMaya.onPaymentSuccess = function() {
+        alert('Payment successful');
+      };
+
+      PayMaya.onPaymentFailure = function() {
+        alert('Payment Failed');
+      };
+
+      PayMaya.onPaymentCanceled = function() {
+        alert('Payment Canceled');
       };
 
     </script>

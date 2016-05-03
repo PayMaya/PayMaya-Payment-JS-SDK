@@ -3,6 +3,11 @@
 		publicKey: 'pk-N6TvoB4GP2kIgNz4OCchCTKYvY5kPQd2HDRSg8rPeQG',
 		sandbox: false,
 		merchantUrl: {
+			redirect: {
+				success: '',
+				failure: '',
+				cancel: ''
+			},
 			payments: {
 				create: '',
 				get: ''
@@ -14,18 +19,22 @@
 
 			}
 		},
+		statusPage: {
+			success: 1,
+			failed: 0,
+			canceled: 2,
+		},
 		_server: function() {
 			var url = '';
 
 			if (this.sandbox === 2) {
-				//url = 'http://192.168.224.225/paymaya-php-library';
 				url = 'http://52.76.57.133:8001/v1';
 			}
 			else if (this.sandbox === 1){
-				url = 'https://pg-sandbox.paymaya.com/payments/v1'; //sample production url
+				url = 'https://pg-sandbox.paymaya.com/payments/v1';
 			}
 			else{
-				url = 'https://api.paymaya.com/payments/v1';
+				url = 'https://api.paymaya.com/payments/v1'; //sample production url
 			}
 
 			return url;
@@ -72,11 +81,16 @@
 			}
 
 			var data = {}, paymentsArgs = arguments;
-			var paymentGetURL = 'paymentsget.json';//  http://paymaya.cloudapp.net/paymaya-php-library/payment.php
-			var paymentCreateURL = 'http://192.168.224.225/paymaya-php-library/payment.php'; //http://paymaya.cloudapp.net/paymaya-php-library/payment.php' ;paymentscreate.json
+			var paymentGetURL = this.merchantUrl.payments.get;
+			var paymentCreateURL = this.merchantUrl.payments.create;
 
 			if (typeof obj === 'object') {
 				data = obj || {};
+				data.redirectUrl = {
+					success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
+					failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
+					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
+				};
 			}
 			else if(typeof obj === 'string') {
 				data = this.createPaymentData(obj);
@@ -107,36 +121,36 @@
 					data: data,
 					success: function(responseData){
 						try{
-							var parsedData = JSON.parse(responseData);
+							var resp,
+								parsedData = JSON.parse(responseData),
+								defaultResp = {
+									id: '',
+									environment: 'development',
+									isPaid: false,
+									status: "for_detok",
+									amount: 0,
+									currency: "PHP",
+									refunded: false,
+									captured: true,
+									amountRefunded: 0,
+									description: "",
+									verificationUrl: ""
+								};
+
+							resp = PayMaya.extend(defaultResp, parsedData);
 
 							if(paymentsArgs.length === 2) {
-								paymentsArgs[1].call(this, parsedData);
+								paymentsArgs[1].call(this, resp);
 							}
 
 							/*
-							{
-								"id": "tok_6LmZsA3V2Cypjp4242",
-								"environment": "development",
-								"isPaid": false,
-								"status": "for_detok",
-								"amount": 100,
-								"currency": "PHP",
-								"refunded": false,
-								"captured": true,
-								"amountRefunded": 0,
-								"description": "Charge for test@example.com",
-								"createdAt": "2016-04-27T09:14:59.000Z",
-								"updatedAt": "2016-04-27T09:14:59.000Z",
-								"verificationUrl": "http://checkout.com"
-							};
-
 							Launched the Panel when the response have the verification URL.
 							Payment is not charge yet until the 3DS Authentication succeeded.
 							After the 3DS Authentication it will redirect to a payment status page inside
 							the iframe and that page will change the parent location url to match the url inside the iframe.
 							*/
 
-							w.PayMaya.addPanel(parsedData.verificationUrl || '', function() {
+							w.PayMaya.addPanel(resp.verificationUrl, function() {
 
 							});
 
@@ -380,9 +394,9 @@
 					}
 				},
 				redirectUrl: {
-					success: '',
-					failure: '',
-					cancel: ''
+					success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
+					failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
+					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
 				}
 			};
 
@@ -416,7 +430,7 @@
 			paymayaClose.style.backgroundImage = "url(data:image/png;base64,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)";
 
 			paymayaClose.onclick = function(){
-				w.PayMaya.removePanel();
+				w.PayMaya.removePanel(PayMaya.statusPage.canceled);
 			};
 
 			/*This must be changeable*/
@@ -439,15 +453,33 @@
 
 			return true;
 		},
-		removePanel: function() {
-			var d;
+		removePanel: function(confirmPage) {
+			if(isNaN(confirmPage) === true) {
+				throw 'The values for the parameter for removePanel should come from PayMaya.statusPage object';
+			}
+
+			var winObj;
+
 			if (w.top !== w.self) {
-				d = w.top.document;
+				winObj = w.top;
 			}
 			else {
-				d = w.document;
+				winObj = w;
 			}
-			d.body.removeChild(d.getElementById('paymaya-container'));
+
+			winObj.document.body.removeChild(winObj.document.getElementById('paymaya-container'));
+
+			switch (confirmPage) {
+				case 0:
+					winObj.PayMaya.onPaymentFailure.apply(winObj.PayMaya);
+					break;
+				case 1:
+					winObj.PayMaya.onPaymentSuccess.apply(winObj.PayMaya);
+					break;
+				case 2:
+					winObj.PayMaya.onPaymentCanceled.apply(winObj.PayMaya);
+					break;
+			}
 		},
 		base64: function(data) {
 			var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
