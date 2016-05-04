@@ -444,14 +444,22 @@
 			return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
 		},
 		_xhrObj: function() {
-			var req;
+			var req, msxml = ['MSXML2.XMLHTTP.6.0','MSXML2.XMLHTTP.3.0','MSXML2.XMLHTTP','Microsoft.XMLHTTP'];
 
 			if (w.XMLHttpRequest) {
 				req = new w.XMLHttpRequest();
 			}
 			else {
 				if (w.ActiveXObject) {
-					try {
+					for(var i = 0; i < msxml.length; i++) {
+						try{
+							req = new w.ActiveXObject(msxml[i]);
+						}catch (e){
+							continue;
+						}
+						break;
+					}
+					/*try {
 						req = new w.ActiveXObject('MSXML2.XMLHTTP.6.0');
 					}
 					catch (e) {
@@ -471,7 +479,7 @@
 								}
 							}
 						}
-					}
+					}*/
 				}
 			}
 
