@@ -205,14 +205,14 @@
 
 			if(config.paymaya === true) {
 
-				if(this.sandbox === 2) {
+				/*if(this.sandbox === 2) {
 					requestHeader.push({name: 'x-party-id', value: '1703'});
 				}
 				else if(this.sandbox === 1){
 					requestHeader.push({name: 'Authorization', value: 'Basic ' + this.base64(this.publicKey + String.fromCharCode(58))});
-				}
+				}*/
 
-				//requestHeader.push({name: 'Authorization', value: 'Basic ' + this.base64(this.publicKey + String.fromCharCode(58))});
+				requestHeader.push({name: 'Authorization', value: 'Basic ' + this.base64(this.publicKey + String.fromCharCode(58))});
 				xhrURL = this._server() + config.url;
 			}
 			else{
