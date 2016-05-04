@@ -80,21 +80,11 @@
 				throw 'TokenID required in order to create a payment.';
 			}
 
-			var data = {}, paymentsArgs = arguments;
+			var data, paymentsArgs = arguments;
 			var paymentGetURL = this.merchantUrl.payments.get;
 			var paymentCreateURL = this.merchantUrl.payments.create;
 
-			if (typeof obj === 'object') {
-				data = obj || {};
-				data.redirectUrl = {
-					success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
-					failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
-					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
-				};
-			}
-			else if(typeof obj === 'string') {
-				data = this.createPaymentData(obj);
-			}
+			data = this._checkPaymentArgs(obj);
 
 			if(typeof obj === 'function') {
 				this.ajax({
@@ -137,7 +127,7 @@
 									verificationUrl: ""
 								};
 
-							resp = PayMaya.extend(defaultResp, parsedData);
+							resp = w.PayMaya.extend(defaultResp, parsedData);
 
 							if(paymentsArgs.length === 2) {
 								paymentsArgs[1].call(this, resp);
@@ -214,14 +204,15 @@
 			config = this.extend(defaultConfig, obj);
 
 			if(config.paymaya === true) {
-				if(this.sandbox === 2) {
-					/*Remove this in production and also in sandbox. Temporary only.*/
+
+				/*if(this.sandbox === 2) {
 					requestHeader.push({name: 'x-party-id', value: '1703'});
 				}
 				else if(this.sandbox === 1){
 					requestHeader.push({name: 'Authorization', value: 'Basic ' + this.base64(this.publicKey + String.fromCharCode(58))});
-				}
+				}*/
 
+				requestHeader.push({name: 'Authorization', value: 'Basic ' + this.base64(this.publicKey + String.fromCharCode(58))});
 				xhrURL = this._server() + config.url;
 			}
 			else{
@@ -516,6 +507,22 @@
 					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
 				}
 			};
+		},
+		_checkPaymentArgs: function(obj) {
+			var ObjData;
+			if (typeof obj === 'object') {
+				ObjData = obj || {};
+				ObjData.redirectUrl = {
+					success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
+					failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
+					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
+				};
+			}
+			else if(typeof obj === 'string') {
+				ObjData = this.createPaymentData(obj);
+			}
+
+			return ObjData;
 		}
 	};
 })(window);
