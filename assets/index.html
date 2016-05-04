@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
     <title>PayMaya Payment SDK</title>
     <script src="./sdk/paymaya.min.js"></script>
     <link href="./css/style.min.css" rel="stylesheet">
@@ -57,12 +58,11 @@
 
         PayMaya.sandbox = 2;
         PayMaya.merchantUrl.payments.get = 'paymentsget.json';
-        PayMaya.merchantUrl.payments.create = 'http://192.168.225.48/paymaya-php-library/payment.php';
+        PayMaya.merchantUrl.payments.create = 'http://192.168.224.231/paymaya-php-library/payment.php';
 
         PayMaya.merchantUrl.redirect.success = '/PayMaya-Payment-JS-SDK/dist/success.html';
         PayMaya.merchantUrl.redirect.failure = '/PayMaya-Payment-JS-SDK/dist/failure.html';
         PayMaya.merchantUrl.redirect.cancel = '/PayMaya-Payment-JS-SDK/dist/cancel.html';
-
 
         PayMaya.getTokenID('#payment-form', function(pObj, tokenData){
           var tokend= JSON.parse(tokenData);
