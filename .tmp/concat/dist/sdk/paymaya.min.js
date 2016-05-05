@@ -486,35 +486,35 @@
 			return req;
 		},
 		_paymentsPostData: function(tokenID,obj) {
-			return {
-				paymentTokenId: tokenID,
-				totalAmount: {
-					amount: obj.amount || 0,
-					currency: obj.currency || ''
+			return JSON.parse({
+				"paymentTokenId": tokenID,
+				"totalAmount": {
+					"amount": obj.amount || 0,
+					"currency": obj.currency || ''
 				},
-				buyer: {
-					firstName: obj.firstName || '',
-					middleName: obj.middleName || '',
-					lastName: obj.lastName || '',
-					contact: {
-						phone: obj.phone || '',
-						email: obj.email || ''
+				"buyer": {
+					"firstName": obj.firstName || '',
+					"middleName": obj.middleName || '',
+					"lastName": obj.lastName || '',
+					"contact": {
+						"phone": obj.phone || '',
+						"email": obj.email || ''
 					},
-					billingAddress: {
-						line1: obj.line1 || '',
-						line2: obj.line2 || '',
-						city: obj.city || '',
-						state: obj.state || '',
-						zipCode: obj.zipCode || '',
-						countryCode: obj.countryCode || ''
+					"billingAddress": {
+						"line1": obj.line1 || '',
+						"line2": obj.line2 || '',
+						"city": obj.city || '',
+						"state": obj.state || '',
+						"zipCode": obj.zipCode || '',
+						"countryCode": obj.countryCode || ''
 					}
 				},
-				redirectUrl: {
-					success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
-					failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
-					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
+				"redirectUrl": {
+					"success": w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
+					"failure": w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
+					"cancel": w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
 				}
-			};
+			});
 		},
 		_checkPaymentArgs: function(obj) {
 			var ObjData;
