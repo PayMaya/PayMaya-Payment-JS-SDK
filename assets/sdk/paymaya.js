@@ -501,10 +501,11 @@
 			return obj[propName] || returnVal;
 		},
 		_getRedirectURL: function() {
+			var locationValue = w.location.protocol + String.fromCharCode(47) + String.fromCharCode(47) + w.location.host;
 			return {
-				success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
-				failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
-				cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
+				success: locationValue + this.merchantUrl.redirect.success,
+				failure: locationValue + this.merchantUrl.redirect.failure,
+				cancel: locationValue + this.merchantUrl.redirect.cancel
 			};
 		},
 		_checkPaymentArgs: function(obj) {
