@@ -486,35 +486,38 @@
 			return req;
 		},
 		_paymentsPostData: function(tokenID,obj) {
-			return JSON.parse({
-				"paymentTokenId": tokenID,
-				"totalAmount": {
-					"amount": obj.amount || 0,
-					"currency": obj.currency || ''
+			return {
+				paymentTokenId: tokenID,
+				totalAmount: {
+					amount: this._checkObjPropExist(obj, 'amount', 0),
+					currency: this._checkObjPropExist(obj, 'currency', '')
 				},
-				"buyer": {
-					"firstName": obj.firstName || '',
-					"middleName": obj.middleName || '',
-					"lastName": obj.lastName || '',
-					"contact": {
-						"phone": obj.phone || '',
-						"email": obj.email || ''
+				buyer: {
+					firstName: this._checkObjPropExist(obj, 'firstName', ''),
+					middleName: this._checkObjPropExist(obj, 'middleName', ''),
+					lastName: this._checkObjPropExist(obj, 'lastName', ''),
+					contact: {
+						phone: this._checkObjPropExist(obj, 'phone', ''),
+						email: this._checkObjPropExist(obj, 'email', '')
 					},
-					"billingAddress": {
-						"line1": obj.line1 || '',
-						"line2": obj.line2 || '',
-						"city": obj.city || '',
-						"state": obj.state || '',
-						"zipCode": obj.zipCode || '',
-						"countryCode": obj.countryCode || ''
+					billingAddress: {
+						line1: this._checkObjPropExist(obj, 'line1', ''),
+						line2: this._checkObjPropExist(obj, 'line2', ''),
+						city: this._checkObjPropExist(obj, 'city', ''),
+						state: this._checkObjPropExist(obj, 'state', ''),
+						zipCode: this._checkObjPropExist(obj, 'zipCode', ''),
+						countryCode: this._checkObjPropExist(obj, 'countryCode', '')
 					}
 				},
-				"redirectUrl": {
-					"success": w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
-					"failure": w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
-					"cancel": w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
+				redirectUrl: {
+					success: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.success,
+					failure: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.failure,
+					cancel: w.location.protocol + '//' + w.location.host + this.merchantUrl.redirect.cancel
 				}
-			});
+			};
+		},
+		_checkObjPropExist: function(obj,propName, returnVal) {
+			return obj[propName] || returnVal;
 		},
 		_checkPaymentArgs: function(obj) {
 			var ObjData;
