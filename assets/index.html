@@ -41,24 +41,13 @@
       </div>
     </div>
 
-
-    <!--<div id="paymaya-container">
-      <div id="paymaya-box">
-        <div id="paymaya-border">
-          <div id="paymaya-close"></div>
-          <iframe id="paymaya-render" src="" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation" frameborder="0" scrolling="no"></iframe>
-        </div>
-      </div>
-    </div>
-    -->
-
     <script type="text/javascript" charset="UTF-8">
 
       document.getElementById('payment-form').onsubmit = function(){
 
         PayMaya.sandbox = 2;
         PayMaya.merchantUrl.payments.get = 'paymentsget.json';
-        PayMaya.merchantUrl.payments.create = 'http://192.168.224.231/paymaya-php-library/payment.php';
+        PayMaya.merchantUrl.payments.create = 'http://192.168.224.228/paymaya-php-library/payment.php';
 
         PayMaya.merchantUrl.redirect.success = '/PayMaya-Payment-JS-SDK/dist/success.html';
         PayMaya.merchantUrl.redirect.failure = '/PayMaya-Payment-JS-SDK/dist/failure.html';
