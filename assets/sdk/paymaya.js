@@ -367,8 +367,8 @@
 			paymayaBox.style.height = '500px';
 			iframeDom.src = url;
 
-			iframeDom.width = (parseInt(this._replace(paymayaBox.style.width.toString(), 'px', ''), 10) - 20) + 'px';
-			iframeDom.height = (parseInt(this._replace(paymayaBox.style.height.toString(), 'px', ''), 10) - 20) + 'px';
+			iframeDom.width = this._getValueInPixels(paymayaBox.style.width.toString(), 20) + 'px';
+			iframeDom.height = this._getValueInPixels(paymayaBox.style.height.toString(), 20) + 'px';
 			iframeDom.frameBorder = 0;
 			iframeDom.scrolling = 'no';
 			iframeDom.id = 'paymaya-render';
@@ -520,8 +520,8 @@
 
 			return ObjData;
 		},
-		_replace: function(value, search, toReplace) {
-			return value.replace(search, toReplace);
+		_getValueInPixels: function(value, deduct) {
+			return parseInt(value.replace('px', ''),10) - deduct;
 		}
 	};
 }(window));
