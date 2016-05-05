@@ -56,11 +56,11 @@ module.exports = function(grunt) {
         dateFormat: function(time) {
           grunt.log.writeln('The watch finished in ' + time + 'ms at' + (new Date()).toString());
           grunt.log.writeln('Waiting for more changes...');
-        },
+        }
       },
       src: {
         files: ['Gruntfile.js', '<%= meta.sdkAssetsPath %>*.js', '<%= meta.cssAssetsPath %>*.css', '<%= meta.imgAssetsPath %>*.{png,gif,jpg,svg}', '<%= meta.sdkDistPath %>*.js', '<%= meta.cssDistPath %>*.css', '<%= meta.imgDistPath %>*.{png,gif,jpg,svg}'],
-        tasks: ['default'],
+        tasks: ['default']
       },
 
       min: {
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
       //html: 'index.html',
       options: {
         dest: 'dist'
-      },
+      }
     },
 
     // Usemin
@@ -174,7 +174,7 @@ module.exports = function(grunt) {
             '*.html',
 	          '*.json'
           ],
-          dest: 'dist/',
+          dest: 'dist/'
           /*options: {
             process: function(content, srcpath) {
               return content.replace(/[dist/sdk/paymaya.min.*.js]/, "dist/sdk/paymaya.min.js");
