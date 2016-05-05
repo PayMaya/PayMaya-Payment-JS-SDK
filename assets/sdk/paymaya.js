@@ -533,4 +533,4 @@
 			return ObjData;
 		}
 	};
-})(window);
+}(window));
