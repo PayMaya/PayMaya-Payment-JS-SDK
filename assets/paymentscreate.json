@@ -1,0 +1,15 @@
+{
+  "id": "tok_6LmZsA3V2Cypjp4242",
+  "environment": "development",
+  "isPaid": false,
+  "status": "for_detok",
+  "amount": 100,
+  "currency": "PHP",
+  "refunded": false,
+  "captured": true,
+  "amountRefunded": 0,
+  "description": "Charge for test@example.com",
+  "createdAt": "2016-04-27T09:14:59.000Z",
+  "updatedAt": "2016-04-27T09:14:59.000Z",
+  "verificationUrl": "http://www.gmanetwork.com"
+}
