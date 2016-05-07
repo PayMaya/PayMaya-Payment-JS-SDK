@@ -45,7 +45,7 @@
 
       document.getElementById('payment-form').onsubmit = function(){
 
-        PayMaya.sandbox = 2;
+        PayMaya.sandbox = 1;
         PayMaya.merchantUrl.payments.get = 'paymentsget.json';
         PayMaya.merchantUrl.payments.create = 'http://192.168.224.228/paymaya-php-library/payment.php';
 
