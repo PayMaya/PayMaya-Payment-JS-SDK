@@ -25,6 +25,7 @@ ratings:
   - "**.py"
   - "**.rb"
 exclude_paths:
+- .tmp/
 - dist/
 - node_modules/
 - test/
